@@ -5,6 +5,8 @@
 <label for="username">Exact Twitch login</label>
 <input id="username" autocomplete="off" spellcheck="false" placeholder="username" pattern="[A-Za-z0-9_]{1,25}" maxlength="25">
 <label class="toggle"><input id="enabled" type="checkbox"> Automatically copy new messages</label>
+<label for="alert-mode">Copied-message alert</label>
+<select id="alert-mode"><option value="toast">Page toast</option><option value="desktop">Desktop notification</option></select>
 <button type="submit">Save</button>
 </form>
 <p>Each matching message replaces your clipboard. Keep the Twitch chat open. Use the login, not the display name.</p>

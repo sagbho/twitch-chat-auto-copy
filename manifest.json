@@ -1,10 +1,10 @@
 {
   "manifest_version": 3,
   "name": "Twitch Chat Clipboard",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Copy each new chat message from one exact Twitch login to your clipboard.",
   "minimum_chrome_version": "116",
-  "permissions": ["storage", "offscreen", "clipboardWrite"],
+  "permissions": ["storage", "offscreen", "clipboardWrite", "notifications"],
   "background": { "service_worker": "background.js" },
   "action": { "default_popup": "popup.html" },
   "content_scripts": [{
@@ -13,3 +13,4 @@
     "run_at": "document_idle"
   }]
 }
+

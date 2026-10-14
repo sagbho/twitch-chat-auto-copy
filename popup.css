@@ -8,3 +8,4 @@ p { color: #c4c4cc; font-size: 12px; line-height: 1.5; }
 #status { color: #d9bdff; overflow-wrap: anywhere; }
 pre { white-space: pre-wrap; overflow-wrap: anywhere; max-height: 140px; overflow: auto; font: 13px system-ui; background: #27272a; padding: 10px; border-radius: 5px; }
 button:disabled { opacity: .5; cursor: default; }
+select { width: 100%; padding: 8px; margin-bottom: 14px; background: #27272a; color: white; border: 1px solid #71717a; border-radius: 5px; }

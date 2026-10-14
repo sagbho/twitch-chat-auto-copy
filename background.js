@@ -20,7 +20,7 @@ chrome.runtime.onMessage.addListener((message, sender, reply) => {
       !sender.url?.startsWith('https://www.twitch.tv/') ||
       typeof message.text !== 'string' || typeof message.login !== 'string') return;
   queue = queue.catch(() => {}).then(async () => {
-    const settings = await chrome.storage.local.get({ username: '', enabled: false });
+    const settings = await chrome.storage.local.get({ username: '', enabled: false, alertMode: 'toast' });
     if (!settings.enabled || message.login.toLowerCase() !== settings.username.toLowerCase()) {
       return { ok: true, skipped: true };
     }
@@ -29,7 +29,20 @@ chrome.runtime.onMessage.addListener((message, sender, reply) => {
       const result = await chrome.runtime.sendMessage({ target: 'offscreen', text: message.text });
       if (!result?.ok) throw new Error(result?.error || 'Clipboard write failed');
       await chrome.storage.local.set({ lastCopy: new Date().toISOString(), lastText: message.text, lastLogin: message.login, lastError: '' });
-      return { ok: true };
+      // Notification errors must never turn a successful copy into a copy failure.
+      const alertMode = settings.alertMode === 'desktop' ? 'desktop' : 'toast';
+      try {
+        if (alertMode === 'desktop') {
+        await chrome.notifications.clear('latest-copied-message');
+        await chrome.notifications.create('latest-copied-message', {
+          type: 'basic', iconUrl: 'icon128.png', title: 'Copied message',
+          message: message.text, contextMessage: message.login
+        });
+        }
+      } catch (error) {
+        console.debug('Twitch Chat Clipboard notification:', error.message);
+      }
+      return { ok: true, alertMode };
     } catch (error) {
       await chrome.storage.local.set({ lastError: error.message });
       return { ok: false, error: error.message };

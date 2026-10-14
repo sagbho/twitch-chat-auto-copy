@@ -21,8 +21,19 @@ If Chrome says **"Manifest file is missing or unreadable"**, go one folder deepe
 
 ## Use
 
-Each new matching message replaces your clipboard. Paste it wherever you need it. A bottom-right **Copied message** toast shows the exact text copied.
+Each new matching message replaces your clipboard. Paste it wherever you need it. In the popup, choose your **Copied-message alert** and click **Save**:
+
+- **Page toast** (default): a bottom-right toast on Twitch shows the exact copied text.
+- **Desktop notification**: a **Copied message** notification includes the text while you use another tab or app. Your operating system may shorten long text. Only the latest notification is kept.
+
+You get only the selected alert, never both. **Copy latest** copies again without an automatic alert.
+
+Keep Twitch chat open in a tab. Chrome must be running, and Chrome/extension notifications must be allowed in your operating system. Background tabs can pause chat updates; messages must arrive in the open chat to be copied.
 
 Turn the switch off and click **Save** to stop. The popup also shows the latest copied message and a **Copy latest** button.
+
+## Update
+
+Download and extract the new ZIP. Replace the files in your existing extension folder, then click **Reload** for Twitch Chat Clipboard at `chrome://extensions` and refresh Twitch. Version 1.1 adds the **notifications** permission; approve it if Chrome asks. If alerts are hidden, check Chrome's notification settings in your operating system and Do Not Disturb.
 
 If this helps, a GitHub star is welcome!

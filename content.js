@@ -59,7 +59,7 @@
     if (!settings.enabled || !settings.username || login.toLowerCase() !== settings.username.toLowerCase()) return;
     const text = messageText(body);
     chrome.runtime.sendMessage({ target: 'worker', type: 'copy', login, text })
-      .then(result => { if (result?.ok && !result.skipped) showCopiedToast(text); })
+      .then(result => { if (result?.ok && !result.skipped && result.alertMode === 'toast') showCopiedToast(text); })
       .catch(error => console.debug('Twitch Chat Clipboard:', error.message));
   }
   function attach() {
@@ -89,3 +89,5 @@
   // Twitch navigates between channels without a full page load.
   new MutationObserver(attach).observe(document.documentElement, { childList: true, subtree: true });
 })();
+
+
