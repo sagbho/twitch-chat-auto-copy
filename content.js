@@ -6,6 +6,35 @@
   let settings = { username: '', enabled: false };
   let toastHost;
   let toastTimer;
+  let audioContext;
+  function playDing() {
+    // A page interaction may be needed before Chrome permits audio playback.
+    try {
+      const Audio = window.AudioContext || window.webkitAudioContext;
+      if (!Audio) return;
+      audioContext ||= new Audio();
+      Promise.resolve(audioContext.resume()).then(() => {
+        if (audioContext.state !== 'running') return;
+        const now = audioContext.currentTime;
+        const tone = audioContext.createOscillator();
+        const volume = audioContext.createGain();
+        tone.type = 'sine';
+        tone.frequency.setValueAtTime(660, now);
+        volume.gain.setValueAtTime(0, now);
+        volume.gain.linearRampToValueAtTime(0.06, now + 0.025);
+        volume.gain.exponentialRampToValueAtTime(0.001, now + 0.28);
+        tone.connect(volume);
+        volume.connect(audioContext.destination);
+        tone.onended = () => { tone.disconnect(); volume.disconnect(); };
+        tone.start(now);
+        tone.stop(now + 0.3);
+      }).catch(() => {});
+    } catch (_) { /* Audio is best-effort; copying and the toast still work. */ }
+  }
+  // Unlock audio on a real page interaction without playing an extra ding.
+  document.addEventListener('pointerdown', () => {
+    if (audioContext?.state === 'suspended') audioContext.resume().catch(() => {});
+  }, { passive: true });
   function showCopiedToast(text) {
     clearTimeout(toastTimer);
     toastHost?.remove();
@@ -32,6 +61,7 @@
     toast.append(title, body);
     shadow.append(style, toast);
     document.documentElement.append(toastHost);
+    playDing();
     toastTimer = setTimeout(() => { toastHost?.remove(); toastHost = undefined; }, 6000);
   }
   chrome.storage.local.get(settings).then(value => { settings = value; });
@@ -89,5 +119,6 @@
   // Twitch navigates between channels without a full page load.
   new MutationObserver(attach).observe(document.documentElement, { childList: true, subtree: true });
 })();
+
 
 

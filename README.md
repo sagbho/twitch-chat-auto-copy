@@ -23,7 +23,7 @@ If Chrome says **"Manifest file is missing or unreadable"**, go one folder deepe
 
 Each new matching message replaces your clipboard. Paste it wherever you need it. In the popup, choose your **Copied-message alert** and click **Save**:
 
-- **Page toast** (default): a bottom-right toast on Twitch shows the exact copied text.
+- **Page toast** (default): a bottom-right toast on Twitch shows the exact copied text with a short ding. If it is silent, click once anywhere on Twitch to allow page audio, and check that the tab is not muted. Browser autoplay rules can block sound; copying still works.
 - **Desktop notification**: a **Copied message** notification includes the text while you use another tab or app. Your operating system may shorten long text. Only the latest notification is kept.
 
 You get only the selected alert, never both. **Copy latest** copies again without an automatic alert.
