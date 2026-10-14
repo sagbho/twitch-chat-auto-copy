@@ -1,0 +1,10 @@
+body { width: 300px; margin: 18px; background: #18181b; color: #efeff1; font: 14px system-ui, sans-serif; }
+h1 { font-size: 18px; margin: 0 0 18px; }
+label { display: block; margin-bottom: 8px; }
+input[type=text], input:not([type]) { box-sizing: border-box; width: 100%; padding: 9px; background: #27272a; border: 1px solid #71717a; border-radius: 5px; color: white; }
+.toggle { margin-top: 16px; }
+button { background: #9146ff; color: white; border: 0; border-radius: 5px; padding: 9px 20px; cursor: pointer; }
+p { color: #c4c4cc; font-size: 12px; line-height: 1.5; }
+#status { color: #d9bdff; overflow-wrap: anywhere; }
+pre { white-space: pre-wrap; overflow-wrap: anywhere; max-height: 140px; overflow: auto; font: 13px system-ui; background: #27272a; padding: 10px; border-radius: 5px; }
+button:disabled { opacity: .5; cursor: default; }

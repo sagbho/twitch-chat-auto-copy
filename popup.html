@@ -1,0 +1,11 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Twitch Chat Clipboard</title><link rel="stylesheet" href="popup.css"></head>
+<body><h1>Twitch Chat Clipboard</h1>
+<form id="settings">
+<label for="username">Exact Twitch login</label>
+<input id="username" autocomplete="off" spellcheck="false" placeholder="username" pattern="[A-Za-z0-9_]{1,25}" maxlength="25">
+<label class="toggle"><input id="enabled" type="checkbox"> Automatically copy new messages</label>
+<button type="submit">Save</button>
+</form>
+<p>Each matching message replaces your clipboard. Keep the Twitch chat open. Use the login, not the display name.</p>
+<p id="status" role="status"></p><pre id="latest">No message yet.</pre><button id="copy-latest" type="button" disabled>Copy latest</button><script src="popup.js"></script></body></html>
